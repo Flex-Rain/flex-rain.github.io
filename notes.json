@@ -1,0 +1,21 @@
+{
+  "v": 2,
+  "branches": [
+    {
+      "id": "main",
+      "name": "主脉",
+      "createdAt": "2026-11-03T13:49:27.907Z"
+    }
+  ],
+  "notes": [
+    {
+      "id": "93390013-c6f2-4578-8d1a-1807e794f8aa",
+      "title": "first day",
+      "content": "hello",
+      "branch": "main",
+      "createdAt": "2026-11-03T14:22:18.589Z",
+      "updatedAt": "2026-11-03T14:22:18.589Z"
+    }
+  ],
+  "deleted": {}
+}
