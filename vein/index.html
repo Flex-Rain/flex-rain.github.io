@@ -10,7 +10,7 @@
 :root[data-theme="dark"]{
   --bg:#0b0e14; --panel:#12161f; --panel2:#151a26; --input:#0f141d;
   --border:rgba(255,255,255,.09); --border2:rgba(255,255,255,.2);
-  --text:#e7eaf0; --text2:#9aa3b5; --text3:#6b7280;
+  --text:#e7eaf0; --text2:#9aa3b5; --text3:#6b7280; --title:#f7f9fc;
   --accent:#5b9dff; --accent-soft:rgba(91,157,255,.13); --accent-border:rgba(91,157,255,.5);
   --accent-text:#9cc3ff; --accent-deep:#bcd6ff;
   --spine:rgba(91,157,255,.3); --spine-dash:rgba(91,157,255,.18);
@@ -21,7 +21,7 @@
 :root[data-theme="light"]{
   --bg:#f6f5f1; --panel:#ffffff; --panel2:#fafaf8; --input:#f6f5f1;
   --border:#e5e3db; --border2:#cfccc2;
-  --text:#2c2c2a; --text2:#5f5e5a; --text3:#888780;
+  --text:#2c2c2a; --text2:#5f5e5a; --text3:#888780; --title:#1a1a18;
   --accent:#378add; --accent-soft:#eef5fd; --accent-border:#85b7eb;
   --accent-text:#185fa5; --accent-deep:#0c447c;
   --spine:#d5d2c7; --spine-dash:#e2dfd5;
@@ -87,13 +87,13 @@ main{flex:1;display:flex;min-height:0;position:relative;z-index:1}
 .node{position:relative;padding:0 0 12px 62px;transition:opacity .18s}
 .node .dot{position:absolute;left:42px;top:15px;width:8px;height:8px;border-radius:50%;background:var(--panel);border:1.5px solid var(--text3);transition:all .15s}
 .node.sel .dot{width:12px;height:12px;left:40px;top:13px;background:var(--accent);border-color:var(--bg);box-shadow:0 0 0 2px var(--accent-border)}
-.node.dim{opacity:.3}
+.node.dim{opacity:.45}
 .card{border:1px solid var(--border);border-radius:12px;padding:10px 14px;background:var(--panel);cursor:pointer;transition:border-color .15s,background .15s,box-shadow .15s}
 .card:hover{border-color:var(--border2);background:var(--card-hover)}
 .node.sel .card{border-color:var(--accent);background:var(--accent-soft)}
 .node.kb .card{box-shadow:0 0 0 2px var(--accent-border)}
 .trow{display:flex;align-items:baseline;gap:8px}
-.title{font-size:14px;font-weight:500;color:var(--text)}
+.title{font-size:14px;font-weight:600;color:var(--title)}
 .node.sel .title{color:var(--accent-deep)}
 .date{margin-left:auto;font-size:11px;color:var(--text3);flex:none;padding-left:8px}
 mark{background:var(--mark);color:var(--mark-text);border-radius:3px;padding:0 1px}
