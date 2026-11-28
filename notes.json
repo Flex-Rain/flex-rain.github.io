@@ -16,10 +16,10 @@
     {
       "id": "ecc5a663-7521-42ec-acae-22ea5c81b151",
       "title": "头文件与库文件 2026",
-      "content": "```\n源代码 (.cpp + .h)\n    │  ① 预处理：#include 文本插入、宏展开\n    ▼\n翻译单元\n    │  ② 编译：每个 .cpp 独立编译成 .o/.obj（靠头文件确认外部符号长什么样）\n    ▼\n目标文件 .o/.obj  +  静态库 .a/.lib  +  动态库信息\n    │  ③ 链接：把函数调用和真正的实现地址对接，拼成可执行文件\n    ▼\na.exe / a.out（运行时再按需加载 .so/.dll）\n```\n\n如果只 include 了头文件却没有链接对应的库，编译能过，但链接阶段会报经典的 `undefined reference`（Linux）/ `unresolved external symbol`（Windows）\n\n### `#include \"math_utils.h\"`\n\n1. 优先：**当前源文件所在目录**（就是 `math_utils.cpp` 这个文件所在的文件夹）\n2. 如果找不到，再去**系统头文件搜索目录**（和 `<>` 的搜索目录一样）继续找\n3. 用途：**自己写的头文件、项目内的头文件**\n\n### `#include <iostream>`\n\n1. **直接跳过当前文件目录**，只去编译器预先配置好的系统 / 库搜索目录列表里找\n2. 用途：C++ 标准库、第三方库的头文件（fmt、opencv 等）\n重要纠正一个容易误解的点：\n不是 `\"` 就一定是相对路径、`<>` 就绝对不能写相对路径；只是搜索顺序策略不同。\n比如 `#include <opencv2/opencv.hpp>` 里面也带斜杠，是相对于库的 include 根目录。",
+      "content": "```\n源代码 (.cpp + .h)\n    │  ① 预处理：#include 文本插入、宏展开\n    ▼\n翻译单元\n    │  ② 编译：每个 .cpp 独立编译成 .o/.obj（靠头文件确认外部符号长什么样）\n    ▼\n目标文件 .o/.obj  +  静态库 .a/.lib  +  动态库信息\n    │  ③ 链接：把函数调用和真正的实现地址对接，拼成可执行文件\n    ▼\na.exe / a.out（运行时再按需加载 .so/.dll）\n```\n\n如果只 include 了头文件却没有链接对应的库，编译能过，但链接阶段会报经典的 `undefined reference`（Linux）/ `unresolved external symbol`（Windows）\n\n### `#include \"math_utils.h\"`\n1. 优先：**当前源文件所在目录**（就是 `math_utils.cpp` 这个文件所在的文件夹）\n2. 如果找不到，再去**系统头文件搜索目录**（和 `<>` 的搜索目录一样）继续找\n3. 用途：**自己写的头文件、项目内的头文件**\n\n### `#include <iostream>`\n\n1. **直接跳过当前文件目录**，只去编译器预先配置好的系统 / 库搜索目录列表里找\n2. 用途：C++ 标准库、第三方库的头文件（fmt、opencv 等）\n\n重要纠正一个容易误解的点：\n不是 `\"` 就一定是相对路径、`<>` 就绝对不能写相对路径；只是搜索顺序策略不同。\n比如 `#include <opencv2/opencv.hpp>` 里面也带斜杠，是相对于库的 include 根目录。",
       "branch": "2371a272-ff8a-4839-a828-33a807c10b6b",
       "createdAt": "2026-11-28T02:50:45.362Z",
-      "updatedAt": "2026-11-28T02:50:45.362Z"
+      "updatedAt": "2026-11-28T02:56:15.617Z"
     },
     {
       "id": "2c125326-3fd9-4729-a9c6-36f2fc903e60",
