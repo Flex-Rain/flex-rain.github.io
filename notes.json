@@ -14,6 +14,14 @@
   ],
   "notes": [
     {
+      "id": "150369eb-f77a-4aa3-bc17-28ca82c0c712",
+      "title": "bin目录与path环境变量  2026",
+      "content": "`bin` 是 **binaries（二进制可执行文件）** 的缩写，专门存放可执行程序\n虽然名字叫 binary，但里面的文件只要有**执行权限**就可以，常见两种：\n\n1. 编译出来的 ELF 机器码程序（真正的二进制）；\n2. 带 shebang 的脚本文件，比如 Python、shell 脚本，第一行写：\n\n```\n#!/usr/bin/env python3\n```\n\n内核看到这行就知道该用哪个解释器去运行它。所以 \"可执行\" 看的是权限和格式，不要求一定是编译后的机器码。",
+      "branch": "2371a272-ff8a-4839-a828-33a807c10b6b",
+      "createdAt": "2026-11-28T02:31:15.615Z",
+      "updatedAt": "2026-11-28T02:31:15.615Z"
+    },
+    {
       "id": "b35e26f7-6c6f-4fa6-91e2-1a21ccc3a941",
       "title": "int main()的接收参数  2026",
       "content": "C++接受两种main函数的书写方式\nint main()\nint main(int argc,char** argv)\n\nCRT启动函数_start调用main（） \nint res=main(argc，argv)\n\n#argc 和  argv在调用main之前就以压入栈顶，main可以接收也可以不接收，参数名字也可以换，因为传入的是位置参数\n\n另外，针对于main函数，如果没有写返回值，编译器会自动补上return 0",
