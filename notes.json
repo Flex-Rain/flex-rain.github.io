@@ -14,6 +14,14 @@
   ],
   "notes": [
     {
+      "id": "ecc5a663-7521-42ec-acae-22ea5c81b151",
+      "title": "头文件与库文件 2026",
+      "content": "```\n源代码 (.cpp + .h)\n    │  ① 预处理：#include 文本插入、宏展开\n    ▼\n翻译单元\n    │  ② 编译：每个 .cpp 独立编译成 .o/.obj（靠头文件确认外部符号长什么样）\n    ▼\n目标文件 .o/.obj  +  静态库 .a/.lib  +  动态库信息\n    │  ③ 链接：把函数调用和真正的实现地址对接，拼成可执行文件\n    ▼\na.exe / a.out（运行时再按需加载 .so/.dll）\n```\n\n如果只 include 了头文件却没有链接对应的库，编译能过，但链接阶段会报经典的 `undefined reference`（Linux）/ `unresolved external symbol`（Windows）\n\n### `#include \"math_utils.h\"`\n\n1. 优先：**当前源文件所在目录**（就是 `math_utils.cpp` 这个文件所在的文件夹）\n2. 如果找不到，再去**系统头文件搜索目录**（和 `<>` 的搜索目录一样）继续找\n3. 用途：**自己写的头文件、项目内的头文件**\n\n### `#include <iostream>`\n\n1. **直接跳过当前文件目录**，只去编译器预先配置好的系统 / 库搜索目录列表里找\n2. 用途：C++ 标准库、第三方库的头文件（fmt、opencv 等）\n重要纠正一个容易误解的点：\n不是 `\"` 就一定是相对路径、`<>` 就绝对不能写相对路径；只是搜索顺序策略不同。\n比如 `#include <opencv2/opencv.hpp>` 里面也带斜杠，是相对于库的 include 根目录。",
+      "branch": "2371a272-ff8a-4839-a828-33a807c10b6b",
+      "createdAt": "2026-11-28T02:50:45.362Z",
+      "updatedAt": "2026-11-28T02:50:45.362Z"
+    },
+    {
       "id": "2c125326-3fd9-4729-a9c6-36f2fc903e60",
       "title": "shebang sharpbang 2026",
       "content": "**必须在文件的第一行、最开头**，前面不能有空行或空格，否则内核不认\n**只在直接执行 `./hello.py` 时生效**。如果你手动这样运行：\n\n```\npython3 hello.py\n```\n\nshebang 那行就是普通的一行注释 ——`#` 在 Python、shell 里本来就是注释符，解释器会直接忽略它，不会有任何副作用；\n\n4. 没有执行权限时 shebang 写了也白搭，`./hello.py` 会报 `Permission denied`，这时要么 `chmod +x`，要么显式用解释器调用。\n内核执行文件时先看格式：\n\n- 开头是 ELF 魔数 → 当作编译好的二进制程序直接跑；\n- 开头是 `#!` → 这是个脚本，按 shebang 指定的解释器去跑；\n- 什么标记都没有 → 内核不知道拿什么处理，直接报 `exec format error`。\n\n写一个脚本 `hello.py`：\n\n```\n#!/usr/bin/python3\nprint(\"hello world\")\n```\n\n然后：\n\n```\nchmod +x hello.py      # 加上执行权限\n./hello.py             # 直接当程序运行\n```\n\n内核的处理过程：\n\n1. 发现不是 ELF 文件，但开头是 `#!`；\n2. 读取这一行，拿到解释器路径 `/usr/bin/python3`；\n3. 实际执行的命令等价于：\n\n```\n/usr/bin/python3 ./hello.py\n```\n\n### 2. 借助 `env` 去 PATH 里找（更推荐）\n\n```\n#!/usr/bin/env python3\n#!/usr/bin/env bash\n```\n\n意思是：先运行 `/usr/bin/env` 这个程序，让它在 PATH 环境变量里搜索 `python3`，找到哪个就用哪个。这样不依赖固定安装路径，可移植性更好，开源项目里基本都是这种写法。",
